@@ -6,6 +6,7 @@ void main() {
         ===========================================
         """);
 
+    // --- Datos del estudiante y materia base ---
     String nombreEstudiante = "";
     String materiaPrerrequisito = "Fundamentos de Programación";
     double notaPrerrequisito = 0.0;
@@ -21,6 +22,7 @@ void main() {
         notaPrerrequisito = Double.parseDouble(inputNota);
     } else {
         println("-> Registrando como estudiante de Primer Semestre...");
+        // FIX: arreglo vacío en vez de null (previene NullPointerException)
         historialMaterias = new String[]{};
     }
 
@@ -31,6 +33,7 @@ void main() {
     if (reqCupo.equalsIgnoreCase("S")) {
         boolean cumplePrerrequisito = false;
 
+        // Verifica si el prerrequisito existe en el historial del estudiante
         for (int i = 0; i < historialMaterias.length; i++) {
             if (historialMaterias[i].equals(materiaPrerrequisito)) {
                 cumplePrerrequisito = true;
@@ -40,6 +43,7 @@ void main() {
         String resultadoMatricula = switch (String.valueOf(cumplePrerrequisito)) {
             case "true" -> {
                 if (notaPrerrequisito == 10.0) {
+                    // Nueva regla de negocio: nota perfecta = Tutor de Programación
                     yield "MATRÍCULA APROBADA: Cumple con el prerrequisito.\n"
                             + "¡Felicidades! Ha sido seleccionado como Tutor de Programación del PUCE TEC para este semestre.";
                 } else if (notaPrerrequisito >= 7.0) {
