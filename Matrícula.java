@@ -6,19 +6,19 @@ void main() {
         ===========================================
         """);
 
-    String usr = "";
-    String m1 = "Fundamentos de Programación";
-    double n1 = 0.0;
-    
-    usr = readln("Ingrese el nombre del estudiante: ");
-    String op = readln("¿Es estudiante de reingreso o arrastre? (S/N): ");
+    String nombreEstudiante = "";
+    String materiaPrerrequisito = "Fundamentos de Programación";
+    double notaPrerrequisito = 0.0;
 
-    String[] h_materias = null; 
+    nombreEstudiante = readln("Ingrese el nombre del estudiante: ");
+    String esReingreso = readln("¿Es estudiante de reingreso o arrastre? (S/N): ");
 
-    if (op.equalsIgnoreCase("S")) {
-        h_materias = new String[]{ m1 };
-        String inputNota = readln("Ingrese la nota final obtenida en '" + m1 + "' (0-10): ");
-        n1 = Double.parseDouble(inputNota);
+    String[] historialMaterias = null;
+
+    if (esReingreso.equalsIgnoreCase("S")) {
+        historialMaterias = new String[]{ materiaPrerrequisito };
+        String inputNota = readln("Ingrese la nota final obtenida en '" + materiaPrerrequisito + "' (0-10): ");
+        notaPrerrequisito = Double.parseDouble(inputNota);
     } else {
         println("-> Registrando como estudiante de Primer Semestre...");
     }
@@ -28,20 +28,20 @@ void main() {
     String reqCupo = readln("¿Desea solicitar el cupo para esta materia? (S/N): ");
 
     if (reqCupo.equalsIgnoreCase("S")) {
-        boolean p1 = false;
+        boolean cumplePrerrequisito = false;
 
-        for (int i = 0; i < h_materias.length; i++) {
-            if (h_materias[i].equals(m1)) {
-                p1 = true;
+        for (int i = 0; i < historialMaterias.length; i++) {
+            if (historialMaterias[i].equals(materiaPrerrequisito)) {
+                cumplePrerrequisito = true;
             }
         }
 
-        String resultadoMatricula = switch (String.valueOf(p1)) {
+        String resultadoMatricula = switch (String.valueOf(cumplePrerrequisito)) {
             case "true" -> {
-                if (n1 >= 7.0) {
+                if (notaPrerrequisito >= 7.0) {
                     yield "MATRÍCULA APROBADA: Cumple con el prerrequisito.";
                 } else {
-                    yield "MATRÍCULA RECHAZADA: Reprobó el prerrequisito con " + n1;
+                    yield "MATRÍCULA RECHAZADA: Reprobó el prerrequisito con " + notaPrerrequisito;
                 }
             }
             case "false" -> "MATRÍCULA RECHAZADA: No cuenta con el prerrequisito en su historial.";
