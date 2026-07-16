@@ -21,8 +21,6 @@ void main() {
         notaPrerrequisito = Double.parseDouble(inputNota);
     } else {
         println("-> Registrando como estudiante de Primer Semestre...");
-        // FIX del bug: se inicializa como arreglo vacío en lugar de dejarlo en null,
-        // para evitar NullPointerException más adelante al usar .length
         historialMaterias = new String[]{};
     }
 
@@ -42,7 +40,6 @@ void main() {
         String resultadoMatricula = switch (String.valueOf(cumplePrerrequisito)) {
             case "true" -> {
                 if (notaPrerrequisito == 10.0) {
-                    // Nueva funcionalidad: nota perfecta -> mensaje especial de Tutor
                     yield "MATRÍCULA APROBADA: Cumple con el prerrequisito.\n"
                             + "¡Felicidades! Ha sido seleccionado como Tutor de Programación del PUCE TEC para este semestre.";
                 } else if (notaPrerrequisito >= 7.0) {
